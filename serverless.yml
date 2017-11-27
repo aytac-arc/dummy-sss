@@ -1,0 +1,27 @@
+service:
+  name: gov-sss
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  profile: devalex
+  stage: dev
+  region: eu-west-1
+
+functions:
+  calculate-deduction:
+    handler: handler.calculate
+    events:
+      - http:
+          method: post
+          path: api/v1/calculate
+
+custom:
+  serverless-offline:
+    port: 3001
+
